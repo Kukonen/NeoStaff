@@ -23,15 +23,19 @@ namespace Service.Implementation
 			_context = context;
 		}
 
-		public async Task<BaseResponse<List<BsonDocument>>> Get()
+		public async Task<BaseResponse<List<Dictionary<string, object>>>> Get()
 		{
-			var response = new BaseResponse<List<BsonDocument>>();
+			var response = new BaseResponse<List<Dictionary<string, object>>>();
 
 			try
 			{
 				var filteredPersons = await _context.Activities.Find(new BsonDocument()).ToListAsync();
 
-				response.Data = filteredPersons;
+				foreach (var person in filteredPersons)
+				{
+					response.Data.Add(BsonProcessor.ProcessBsonDocument(person));
+				}
+
 				response.StatusCode = HttpStatusCode.OK;
 
 				return response;

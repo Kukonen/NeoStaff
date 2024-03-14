@@ -25,5 +25,32 @@ namespace Service.Tools
 				}
 			}
 		}
+
+		public static T DeserializeJsonDocument<T>(JsonElement element)
+		{
+			// Создаем объект класса Person
+			T obj = Activator.CreateInstance<T>();
+
+			foreach (var property in typeof(T).GetProperties())
+			{
+				// Получаем значение свойства из JsonElement
+				var jsonProperty = element.GetProperty(property.Name);
+				var value = jsonProperty.ToString();
+
+				// Если свойство имеет вложенный объект, вызываем DeserializeJsonDocument рекурсивно
+				if (property.PropertyType.IsClass && property.PropertyType != typeof(string))
+				{
+					var nestedObject = DeserializeJsonDocument<object>(jsonProperty);
+					property.SetValue(obj, nestedObject);
+				}
+				else
+				{
+					// Устанавливаем значение свойства
+					property.SetValue(obj, Convert.ChangeType(value, property.PropertyType));
+				}
+			}
+
+			return obj;
+		}
 	}
 }

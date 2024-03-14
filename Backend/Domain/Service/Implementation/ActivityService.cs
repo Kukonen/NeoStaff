@@ -11,6 +11,7 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ThirdParty.Json.LitJson;
 
 namespace Service.Implementation
 {
@@ -23,17 +24,24 @@ namespace Service.Implementation
 			_context = context;
 		}
 
-		public async Task<BaseResponse<BsonDocument>> Create(JsonDocument model)
+		public async Task<BaseResponse<Dictionary<string, object>>> Create(JsonDocument model, string type)
 		{
-			var response = new BaseResponse<BsonDocument>();
+			var response = new BaseResponse<Dictionary<string, object>>();
 
 			try
 			{
+				if(!Validation.CheckActivityCorrectFormat(model, type) || Validation.CheckJsonDocumentForInjection(model.RootElement))
+				{
+					response.StatusCode = HttpStatusCode.BadRequest;
+
+					return response;
+				}
+
 				var activity = Converter.JsonToBson(model);
 
 				await _context.Activities.InsertOneAsync(activity);
 
-				response.Data = activity;
+				response.Data = BsonProcessor.ProcessBsonDocument(activity);
 				response.StatusCode = HttpStatusCode.OK;
 
 				return response;
@@ -47,23 +55,23 @@ namespace Service.Implementation
 			}
 		}
 
-		public async Task<BaseResponse<List<BsonDocument>>> Get(string serviceNumber)
+		public async Task<BaseResponse<Dictionary<string, object>>> Get(string serviceNumber)
 		{
-			var response = new BaseResponse<List<BsonDocument>>();
+			var response = new BaseResponse<Dictionary<string, object>>();
 
 			try
 			{
 				var filter = Builders<BsonDocument>.Filter.Eq("serviceNumber", serviceNumber);
 
-				var filteredActivities = await _context.Activities.Find(filter).ToListAsync();
+				var activity = await _context.Activities.Find(filter).FirstAsync();
 
-				if (filteredActivities.Count == 0)
+				if (activity == null)
 				{
 					response.StatusCode = HttpStatusCode.BadRequest;
 					return response;
 				}
 
-				response.Data = filteredActivities;
+				response.Data = BsonProcessor.ProcessBsonDocument(activity);
 				response.StatusCode = HttpStatusCode.OK;
 
 				return response;

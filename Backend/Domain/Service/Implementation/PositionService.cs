@@ -3,6 +3,7 @@ using DAL.Response;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Service.Interface;
+using Service.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,15 +22,19 @@ namespace Service.Implementation
 			_context = context;
 		}
 
-		public async Task<BaseResponse<List<BsonDocument>>> Get()
+		public async Task<BaseResponse<List<Dictionary<string, object>>>> Get()
 		{
-			var response = new BaseResponse<List<BsonDocument>>();
+			var response = new BaseResponse<List<Dictionary<string, object>>>();
 
 			try
 			{
 				var filteredPositions = await _context.Positions.Find(new BsonDocument()).ToListAsync();
 
-				response.Data = filteredPositions;
+				foreach(var position in filteredPositions)
+				{
+					response.Data.Add(BsonProcessor.ProcessBsonDocument(position));
+				}
+
 				response.StatusCode = HttpStatusCode.OK;
 
 				return response;

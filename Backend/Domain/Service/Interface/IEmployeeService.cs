@@ -10,6 +10,6 @@ namespace Service.Interface
 {
 	public interface IEmployeeService
 	{
-		Task<BaseResponse<List<BsonDocument>>> Get();
+		Task<BaseResponse<List<Dictionary<string, object>>>> Get();
 	}
 }
