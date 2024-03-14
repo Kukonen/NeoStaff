@@ -1,0 +1,30 @@
+.select__modal__section {
+    display: flex;
+}
+
+.select__modal__visible {
+    position: absolute;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 0.5rem;
+
+    background-color: var(--background-color-middle);
+
+    /* width: 100%;
+    box-sizing: border-box; */
+}
+
+.select__modal__hidden {
+    display: none;
+}
+
+.select__item {
+    width: 100%;
+
+    font-size: 1rem;
+
+    padding: 0.5rem;
+
+    cursor: pointer;
+}
