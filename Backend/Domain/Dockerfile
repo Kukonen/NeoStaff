@@ -5,10 +5,13 @@ EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["API.csproj", "."]
-RUN dotnet restore "./API.csproj"
+COPY ./API/API.csproj ./API/
+COPY ./DAL/DAL.csproj ./DAL/
+COPY ./Service/Service.csproj ./Services/
+RUN dotnet restore ./API/API.csproj
+
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/API"
 RUN dotnet build "API.csproj" -c Release -o /app/build
 
 FROM build AS publish
