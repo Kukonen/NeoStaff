@@ -36,5 +36,26 @@ namespace API.Controllers
 				return BadRequest();
 			}
 		}
+
+		[HttpGet]
+		[Route("date")]
+		public async Task<ActionResult> GetEmloyeePositionsByDate([FromQuery] string date, [FromQuery] string serviceNumber)
+		{
+			if (ModelState.IsValid)
+			{
+				var response = await _service.GetPositionsByDate(date, serviceNumber);
+
+				if (response.StatusCode != HttpStatusCode.OK)
+				{
+					return StatusCode((int)response.StatusCode, response.Message);
+				}
+
+				return Json(response.Data);
+			}
+			else
+			{
+				return BadRequest();
+			}
+		}
 	}
 }

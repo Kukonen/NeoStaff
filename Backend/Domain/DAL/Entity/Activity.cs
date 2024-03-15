@@ -16,6 +16,8 @@ namespace DAL.Entity
 
         public string Type { get; set; }
 
+        public int Salary { get; set; }
+
         public T ActivityInfo { get; set; }
     }
 }
