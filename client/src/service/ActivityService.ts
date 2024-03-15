@@ -4,7 +4,7 @@ class ActivityService {
 
     static async getPositions(serviceNumber: string, date: string) {
         return new Promise((resolve, reject) => {
-            server('end', 'GET', [
+            server('employees/date', 'GET', [
                 {key: 'serviceNumber', value: serviceNumber},
                 {key: 'date', value: date}
             ]).then(response => {
