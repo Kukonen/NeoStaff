@@ -52,5 +52,36 @@ namespace Service.Tools
 
 			return obj;
 		}
+
+		public static JsonElement AddPropertyToJsonElement(JsonElement element, string propertyName, string propertyValue)
+		{
+			using (var stream = new MemoryStream())
+			{
+				// Создаем JsonWriter для записи JSON в поток
+				using (var writer = new Utf8JsonWriter(stream))
+				{
+					writer.WriteStartObject();
+
+					// Копируем существующие свойства из исходного элемента
+					foreach (var property in element.EnumerateObject())
+					{
+						property.WriteTo(writer);
+					}
+
+					// Добавляем новое свойство
+					writer.WriteString(propertyName, propertyValue);
+
+					writer.WriteEndObject();
+				}
+
+				stream.Seek(0, SeekOrigin.Begin);
+
+				// Преобразуем JSON-строку в новый JsonElement
+				using (var document = JsonDocument.Parse(stream))
+				{
+					return document.RootElement.Clone(); // Возвращаем клон корневого элемента
+				}
+			}
+		}
 	}
 }

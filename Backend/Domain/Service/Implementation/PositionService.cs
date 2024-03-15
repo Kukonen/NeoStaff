@@ -25,6 +25,7 @@ namespace Service.Implementation
 		public async Task<BaseResponse<List<Dictionary<string, object>>>> Get()
 		{
 			var response = new BaseResponse<List<Dictionary<string, object>>>();
+			response.Data = new List<Dictionary<string, object>>();
 
 			try
 			{

@@ -5,7 +5,7 @@ using System.Net;
 namespace API.Controllers
 {
 	[ApiController]
-	[Route("/api/staff/employees")]
+	[Route("/api/staff/positions")]
 	public class PositionController : Controller
 	{
 		private readonly IPositionService _service;

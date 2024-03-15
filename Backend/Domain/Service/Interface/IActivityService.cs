@@ -12,8 +12,8 @@ namespace Service.Interface
 {
 	public interface IActivityService
 	{
-		Task<BaseResponse<Dictionary<string, object>>> Create(JsonDocument model, string type);
+		Task<BaseResponse<Dictionary<string, object>>> Create(JsonDocument model, string type, string serviceNumber);
 
-		Task<BaseResponse<Dictionary<string, object>>> Get(string serviceNumber);
+		Task<BaseResponse<List<Dictionary<string, object>>>> Get(string serviceNumber);
 	}
 }

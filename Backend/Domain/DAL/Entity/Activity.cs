@@ -14,6 +14,8 @@ namespace DAL.Entity
 
         public int Mark { get; set; }
 
+        public string Type { get; set; }
+
         public T ActivityInfo { get; set; }
     }
 }

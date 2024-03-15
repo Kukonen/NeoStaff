@@ -10,7 +10,7 @@ using System.Net;
 namespace API.Controllers
 {
 	[ApiController]
-	[Route("/api/staff/activities/")]
+	[Route("/api/staff/activities")]
 	public class ActivityController : Controller
 	{
 		private readonly IActivityService _service;
@@ -41,11 +41,11 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> Create([FromBody] JsonDocument jsonData, [FromQuery] string type)
+		public async Task<ActionResult> Create([FromBody] JsonDocument jsonData, [FromQuery] string type, [FromQuery] string serviceNumber)
 		{
 			if(ModelState.IsValid)
 			{
-				var response = await _service.Create(jsonData, type);
+				var response = await _service.Create(jsonData, type, serviceNumber);
 
 				if (response.StatusCode != HttpStatusCode.OK)
 				{

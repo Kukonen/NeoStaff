@@ -24,13 +24,13 @@ namespace Service.Implementation
 			_context = context;
 		}
 
-		public async Task<BaseResponse<Dictionary<string, object>>> Create(JsonDocument model, string type)
+		public async Task<BaseResponse<Dictionary<string, object>>> Create(JsonDocument model, string type, string serviceNumber)
 		{
 			var response = new BaseResponse<Dictionary<string, object>>();
 
 			try
 			{
-				if(!Validation.CheckActivityCorrectFormat(model, type) || Validation.CheckJsonDocumentForInjection(model.RootElement))
+				if (!Validation.CheckActivityCorrectFormat(model, type) || Validation.CheckJsonDocumentForInjection(model.RootElement))
 				{
 					response.StatusCode = HttpStatusCode.BadRequest;
 
@@ -38,8 +38,16 @@ namespace Service.Implementation
 				}
 
 				var activity = Converter.JsonToBson(model);
+				activity.Add("type", type);
 
 				await _context.Activities.InsertOneAsync(activity);
+				var result = await AddActivityToEmployee(serviceNumber, activity);
+
+				if(result.StatusCode != HttpStatusCode.OK)
+				{
+					response.StatusCode = HttpStatusCode.BadRequest;
+					return response;
+				}
 
 				response.Data = BsonProcessor.ProcessBsonDocument(activity);
 				response.StatusCode = HttpStatusCode.OK;
@@ -55,23 +63,38 @@ namespace Service.Implementation
 			}
 		}
 
-		public async Task<BaseResponse<Dictionary<string, object>>> Get(string serviceNumber)
+		public async Task<BaseResponse<List<Dictionary<string, object>>>> Get(string serviceNumber)
 		{
-			var response = new BaseResponse<Dictionary<string, object>>();
+			var response = new BaseResponse<List<Dictionary<string, object>>>();
+			response.Data = new List<Dictionary<string, object>>();
 
 			try
 			{
-				var filter = Builders<BsonDocument>.Filter.Eq("serviceNumber", serviceNumber);
+				var filterPerson = Builders<BsonDocument>.Filter.Eq("serviceNumber", serviceNumber);
 
-				var activity = await _context.Activities.Find(filter).FirstAsync();
+				var person = await _context.Employee.Find(filterPerson).FirstAsync();
 
-				if (activity == null)
+				if(person == null)
 				{
 					response.StatusCode = HttpStatusCode.BadRequest;
 					return response;
 				}
 
-				response.Data = BsonProcessor.ProcessBsonDocument(activity);
+				foreach(var id in person["activities"].AsBsonArray)
+				{
+					var filter = Builders<BsonDocument>.Filter.Eq("_id", id.AsObjectId);
+
+					var activity = await _context.Activities.Find(filter).FirstAsync();
+
+					if (activity == null)
+					{
+						response.StatusCode = HttpStatusCode.InternalServerError;
+						return response;
+					}
+
+					response.Data.Add(BsonProcessor.ProcessBsonDocument(activity));
+				}
+
 				response.StatusCode = HttpStatusCode.OK;
 
 				return response;
@@ -84,5 +107,48 @@ namespace Service.Implementation
 				return response;
 			}
 		}
+
+		protected async Task<BaseResponse<BsonDocument>> AddActivityToEmployee(string serviceNumber, BsonDocument activity)
+		{
+			var response = new BaseResponse<BsonDocument>();
+
+			try
+			{
+				var filter = Builders<BsonDocument>.Filter.Eq("serviceNumber", serviceNumber);
+
+				var filteredPerson = await _context.Employee.Find(filter).FirstAsync();
+
+				if(filteredPerson == null)
+				{
+					response.StatusCode = HttpStatusCode.BadRequest;
+					return response;
+				}
+
+				var scores = filteredPerson["scores"].AsInt32;
+				scores += activity["mark"].AsInt32;
+
+				var update = Builders<BsonDocument>.Update.Set("scores", scores)
+														  .Push("activities", activity["_id"].AsObjectId);
+
+				var updatedPerson = await _context.Employee.UpdateOneAsync(filter, update);
+
+				if(updatedPerson.ModifiedCount == 0)
+				{
+					response.StatusCode = HttpStatusCode.InternalServerError;
+					return response;
+				}
+
+				response.StatusCode = HttpStatusCode.OK;
+
+				return response;
+				
+			}
+			catch(Exception)
+			{
+				response.StatusCode = HttpStatusCode.InternalServerError;
+				return response;
+			}
+		}
+
 	}
 }

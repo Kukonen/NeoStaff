@@ -26,10 +26,17 @@ namespace Service.Implementation
 		public async Task<BaseResponse<List<Dictionary<string, object>>>> Get()
 		{
 			var response = new BaseResponse<List<Dictionary<string, object>>>();
+			response.Data = new List<Dictionary<string, object>>();
 
 			try
 			{
-				var filteredPersons = await _context.Activities.Find(new BsonDocument()).ToListAsync();
+				var filteredPersons = await _context.Employee.Find(new BsonDocument()).ToListAsync();
+
+				if(filteredPersons == null || filteredPersons.Count == 0) 
+				{
+					response.StatusCode = HttpStatusCode.BadRequest;
+					return response;
+				}
 
 				foreach (var person in filteredPersons)
 				{

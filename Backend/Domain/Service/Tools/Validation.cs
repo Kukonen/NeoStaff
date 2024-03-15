@@ -62,11 +62,12 @@ namespace Service.Tools
 		public static bool CheckActivityCorrectFormat(JsonDocument jsonData, string type)
 		{
 			JsonElement element = jsonData.RootElement;
+			JsonElement updated_element = Converter.AddPropertyToJsonElement(element, "type", type);
 			JsonElement internalObject = element.GetProperty("activityInfo");
 
 			Type concreteType = DetermineActivityType(type);
 
-			if(element.EnumerateObject().Count() != typeof(Activity<>).GetProperties().Count() ||
+			if(updated_element.EnumerateObject().Count() != typeof(Activity<>).GetProperties().Count() ||
 			   internalObject.EnumerateObject().Count() != concreteType.GetProperties().Count())
 			{
 				return false;
@@ -74,7 +75,7 @@ namespace Service.Tools
 
 			foreach (var property in typeof(Activity<>).GetProperties())
 			{
-				var jsonProperty = element.GetProperty(property.Name.Substring(0, 1).ToLower() + property.Name.Substring(1));
+				var jsonProperty = updated_element.GetProperty(property.Name.Substring(0, 1).ToLower() + property.Name.Substring(1));
 				var value = jsonProperty.ToString();
 
 				if (value == null)
