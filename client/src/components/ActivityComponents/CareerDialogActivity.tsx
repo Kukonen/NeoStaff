@@ -55,9 +55,10 @@ const CareerDialogActivity = ({setData}: ActivityComponentsProps) => {
             <tr>
                 <td>Отзыв о разговоре: </td>
                 <td>
-                    <input 
+                    <textarea 
                         value={report}
                         onChange={e => changeReport(e.target.value)}
+                        rows={3}
                     />
                 </td>
             </tr>

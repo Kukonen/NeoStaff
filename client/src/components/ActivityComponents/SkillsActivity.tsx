@@ -41,9 +41,10 @@ const SkillsActivity = ({setData}: ActivityComponentsProps) => {
     return (
         <>
             <tr>
-                <td>Место соревнования: </td>
+                <td>Навык: </td>
                 <td>
                     <input 
+                        type="text"
                         value={skill}
                         onChange={e => changeSkill(e.target.value)}
                     />
@@ -51,11 +52,12 @@ const SkillsActivity = ({setData}: ActivityComponentsProps) => {
             </tr>
 
             <tr>
-                <td>Тема соревнования: </td>
+                <td>Отзыв от организатора</td>
                 <td>
-                    <input 
+                    <textarea 
                         value={report}
                         onChange={e => changeReport(e.target.value)}
+                        rows={3}
                     />
                 </td>
             </tr>

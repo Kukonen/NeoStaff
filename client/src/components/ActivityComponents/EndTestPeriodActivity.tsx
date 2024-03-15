@@ -100,15 +100,16 @@ const EndTestPeriodActivity = ({setData, serviceNumber, date}: EndTestPeriodActi
             <tr>
                 <td>Отзыв руководителя: </td>
                 <td>
-                    <input 
+                    <textarea 
                         value={report}
                         onChange={e => changeReport(e.target.value)}
+                        rows={3}
                     />
                 </td>
             </tr>
             
             <tr>
-                <td>Роль: </td>
+                <td>Результат: </td>
                 <td>
                     <Select 
                         options={['принят в штат', 'уволен', 'увеличен испытательный срок']}

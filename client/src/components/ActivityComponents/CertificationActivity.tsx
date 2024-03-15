@@ -55,6 +55,7 @@ const CertificationActivity = ({setData}: ActivityComponentsProps) => {
                 <td>Результат: </td>
                 <td>
                     <input 
+                        type="text"
                         value={result}
                         onChange={e => changeResult(e.target.value)}
                     /> 

@@ -31,9 +31,10 @@ const RebukeActivity = ({setData}: ActivityComponentsProps) => {
             <tr>
                 <td>Причина: </td>
                 <td>
-                    <input 
+                    <textarea 
                         value={reason}
                         onChange={e => changeReason(e.target.value)}
+                        rows={3}
                     />
                 </td>
             </tr>

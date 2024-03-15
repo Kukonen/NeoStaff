@@ -45,10 +45,11 @@ const ChangeSelaryActivity = ({setData}: ActivityComponentsProps) => {
             <tr>
                 <td>Причина: </td>
                 <td>
-                    <input 
-                        value={reason}
-                        onChange={e => changeReason(e.target.value)}
-                    />
+                <textarea 
+                    rows={3}
+                    value={reason}
+                    onChange={e => changeReason(e.target.value)}
+                />
                 </td>
             </tr>
             

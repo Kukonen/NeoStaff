@@ -74,6 +74,7 @@ const LearnActivity = ({setData}: ActivityComponentsProps) => {
                 <td>Направление обучения: </td>
                 <td>
                     <input 
+                        type="text"
                         value={specialization}
                         onChange={e => changeSpecialization(e.target.value)}
                     />
@@ -83,6 +84,7 @@ const LearnActivity = ({setData}: ActivityComponentsProps) => {
                 <td>Место обучения: </td>
                 <td>
                     <input 
+                        type="text"
                         value={place}
                         onChange={e => changePlace(e.target.value)}
                     />
@@ -92,6 +94,7 @@ const LearnActivity = ({setData}: ActivityComponentsProps) => {
                 <td>Результат обучения: </td>
                 <td>
                     <input 
+                        type="text"
                         value={result}
                         onChange={e => changeResult(e.target.value)}
                     />
@@ -101,6 +104,7 @@ const LearnActivity = ({setData}: ActivityComponentsProps) => {
                 <td>Подтверждающий документ: </td>
                 <td>
                     <input 
+                        type="text"
                         value={document}
                         onChange={e => changeDocument(e.target.value)}
                     />
