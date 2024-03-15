@@ -12,13 +12,15 @@ namespace NeoStaffBot
             {
                 try
                 {
-                    HttpResponseMessage response = await client.GetAsync("localhost:8080/api/staff/specifications");
+                    HttpResponseMessage response = await client.GetAsync("localhost:8080/api/staff/notification");
+                    Console.WriteLine(response.ToString());
 
                     // Проверяем успешность запроса
                     if (response.IsSuccessStatusCode)
                     {
                         // Читаем содержимое ответа
                         string responseBody = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine(responseBody);
                         try
                         {
                             return JsonSerializer.Deserialize<EmployeeSpecification[]>(responseBody);
