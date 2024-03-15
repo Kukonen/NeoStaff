@@ -39,7 +39,7 @@
                     try
                     {
                         _action.Invoke();
-                        await Task.Delay(1000, _cancellationTokenSource.Token);
+                        await Task.Delay(10000, _cancellationTokenSource.Token);
                     }
                     catch (OperationCanceledException)
                     {
