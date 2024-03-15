@@ -1,0 +1,83 @@
+#report__page {
+    display: flex;
+    justify-content: center;
+}
+
+#report {
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+
+    box-shadow: rgba(48, 47, 47, 0.05) 0px 0px 0px 1px;
+
+    border-radius: 0.5rem;
+
+    gap: 1rem;
+
+    min-width: 40%;
+
+    background-color: var(--background-color-secondary);
+
+    h1 {
+        margin: 0;
+
+        color: var(--font-color-secondary);
+        font-size: 2rem;
+
+        text-align: center;
+    }
+
+    
+
+    button {
+
+        box-shadow: rgba(48, 47, 47, 0.05) 0px 0px 0px 1px;
+
+        font-size: 1rem;
+
+        padding: 0.5rem 1rem;
+
+        background-color: var(--background-color-middle);
+
+        border: 1px solid var(--border-color);
+
+        border-radius: 0.5rem;
+
+        transition: all 150ms ease-in;
+
+        cursor: pointer;
+
+        &:hover {
+
+            color: var(--background-color-middle);
+
+            background-color: var(--secondary-color);
+        }
+    }
+
+    input {
+        font-size: 1rem;
+
+        padding: 0.5rem;
+
+        background-color: var(--background-color-middle);
+
+        border: 1px solid var(--border-color);
+
+        border-radius: 0.5rem;
+
+        outline: none;
+    }
+}
+
+#report__service-number {
+    display: flex;
+    
+    align-items: center;
+
+    gap: 1rem;
+}

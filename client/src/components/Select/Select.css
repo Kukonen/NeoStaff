@@ -1,0 +1,43 @@
+.select__modal__section {
+    display: flex;
+}
+
+.select__modal__visible {
+    /* display: block; */
+
+    position: absolute;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 0.5rem;
+
+    background-color: var(--background-color-middle);
+
+    transition: opacity 0.5s ease-in;
+
+    opacity: 1;
+
+    visibility: visible;
+
+    overflow: hidden;
+}
+
+.select__modal__hidden {
+    /* display: none; */
+    visibility: hidden;
+    transition: opacity 0.5s ease-in;
+
+    overflow: hidden;
+
+    opacity: 0;
+}
+
+.select__item {
+    width: 100%;
+
+    font-size: 1rem;
+
+    padding: 0.5rem;
+
+    cursor: pointer;
+}
