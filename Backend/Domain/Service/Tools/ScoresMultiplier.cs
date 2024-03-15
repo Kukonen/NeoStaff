@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Service.Tools
 {
@@ -23,8 +24,23 @@ namespace Service.Tools
 			{
 				newScores *= COEFF_INNER_PROJECT;
 			}
+			else if(type == "skills" || type == "learn" || type == "certification")
+			{
+				newScores *= COEFF_IMPROVE_SKILLS;
+			}
+			else if(type == "competition")
+			{
+				newScores *= COEFF_COMPETITION;
+			} 
+			else if(type == "event")
+			{
+				newScores *= COEFF_PUBLIC_EVENT;
+			}
 
 			//Множитель баллов за разную KPI работника
+			newScores *= (0.8 + 0.2);
+
+			return (int)Math.Ceiling(newScores);
 		}
 	}
 }

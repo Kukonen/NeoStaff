@@ -8,10 +8,8 @@ namespace DAL.Entity.ActivityInfo
 {
 	public class ChangeSalaryActivityInfo
 	{
-        public string Position { get; set; }
+        //public string Position { get; set; }
 
         public string Reason { get; set; }
-
-        public int Value { get; set; }
     }
 }
