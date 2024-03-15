@@ -2,20 +2,11 @@ version: "3.9"
 
 services:
   api:
-    build: 
+    build:
       context: ./Domain
       dockerfile: Dockerfile
     ports:
       - 8080:80
-    depends_on:
-      - mongodb
-
-  analytics:
-    build: 
-      context: ./Analytics/analytics
-      dockerfile: Dockerfile
-    ports:
-      - 8000:8000
     depends_on:
       - mongodb
 
@@ -26,6 +17,3 @@ services:
     environment:
       MONGODB_HOST: mongodb
       MONGODB_PORT: 27017
-    volumes:
-      - ./docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-
