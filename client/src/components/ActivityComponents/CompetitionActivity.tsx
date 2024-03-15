@@ -83,6 +83,7 @@ const CompetitionActivity = ({setData}: ActivityComponentsProps) => {
                 <td>Место соревнования: </td>
                 <td>
                     <input 
+                        type="text"
                         value={place}
                         onChange={e => changePlace(e.target.value)}
                     />
@@ -93,6 +94,7 @@ const CompetitionActivity = ({setData}: ActivityComponentsProps) => {
                 <td>Тема соревнования: </td>
                 <td>
                     <input 
+                        type="text"
                         value={theme}
                         onChange={e => changeTheme(e.target.value)}
                     />
@@ -100,9 +102,10 @@ const CompetitionActivity = ({setData}: ActivityComponentsProps) => {
             </tr>
             
             <tr>
-                <td>Результат обучения: </td>
+                <td>Результат соревнования: </td>
                 <td>
                     <input 
+                        type="text"
                         value={result}
                         onChange={e => changeResult(e.target.value)}
                     />

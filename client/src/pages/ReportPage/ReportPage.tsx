@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import './ReportPage.css'
 import Report from "../../components/Report/Report";
+import ReportGraphics from "../../components/ReportGraphics/ReportGraphics";
 
 const ReportPage = () => {
     const [serviceNumber, setServiceNumber] = useState<string>("");
@@ -20,8 +21,9 @@ const ReportPage = () => {
                     />
                 </div>
 
-                <Report />
+                <Report serviceNumber={serviceNumber}/>
 
+                <ReportGraphics serviceNumber={serviceNumber}/>
             </div>
         </div>
     );

@@ -1,0 +1,85 @@
+#report__tables {
+    display: flex;
+
+    flex-direction: column;
+
+    width: 100%;
+
+    gap: 1rem;
+
+    table {
+        padding: 1rem 1rem;
+  
+        border-radius: 5px;
+
+        hr {
+            width: 70%;
+            /* border: 1px solid var(--contrast-primary-color); */
+        }
+
+        thead tr td {
+            padding-bottom: 2rem;
+        }
+    }
+
+    table:nth-of-type(odd) {
+        hr {
+            
+            border: 1px solid var(--primary-color);
+        }
+
+        background: linear-gradient(to right, var(--secondary-color) 4px, transparent 4px) 0 0,
+                    linear-gradient(to right, var(--secondary-color) 4px, transparent 4px) 0 100%,
+                    linear-gradient(to left, var(--secondary-color) 4px, transparent 4px) 100% 0,
+                    linear-gradient(to left, var(--secondary-color) 4px, transparent 4px) 100% 100%,
+                    linear-gradient(to bottom, var(--secondary-color) 4px, transparent 4px) 0 0,
+                    linear-gradient(to bottom, var(--secondary-color) 4px, transparent 4px) 100% 0,
+                    linear-gradient(to top, var(--secondary-color) 4px, transparent 4px) 0 100%,
+                    linear-gradient(to top, var(--secondary-color) 4px, transparent 4px) 100% 100%;
+        
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
+
+        /* box-shadow: var(--primary-color) 0px 0px 0px 1px; */
+    }
+    table:nth-of-type(even) {
+        hr {
+            border: 1px solid var(--secondary-color);
+        }
+
+        background: linear-gradient(to right, var(--primary-color) 4px, transparent 4px) 0 0,
+                    linear-gradient(to right, var(--primary-color) 4px, transparent 4px) 0 100%,
+                    linear-gradient(to left, var(--primary-color) 4px, transparent 4px) 100% 0,
+                    linear-gradient(to left, var(--primary-color) 4px, transparent 4px) 100% 100%,
+                    linear-gradient(to bottom, var(--primary-color) 4px, transparent 4px) 0 0,
+                    linear-gradient(to bottom, var(--primary-color) 4px, transparent 4px) 100% 0,
+                    linear-gradient(to top, var(--primary-color) 4px, transparent 4px) 0 100%,
+                    linear-gradient(to top, var(--primary-color) 4px, transparent 4px) 100% 100%;
+
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
+        /* box-shadow: var(--secondary-color) 0px 0px 0px 1px; */
+    }
+}
+
+.table__action {
+    width: 100%;
+    
+    input { 
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+
+    tbody {
+        padding: 1rem;
+    }
+}
+
+.table__action__block {
+
+}
+
+.table__action__header {
+    text-align: center;
+}

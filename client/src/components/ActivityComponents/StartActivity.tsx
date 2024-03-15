@@ -4,38 +4,43 @@ import ActivityService from "../../service/ActivityService";
 import ActivityComponentsProps from "./ActivityComponentsProps";
 
 const StartActivity = ({setData}: ActivityComponentsProps) => {
+    const [currentData, setCurrentData] = useState<
+        {
+            position: string
+        }
+    >(
+        {
+            position: ""
+        }
+    );
+    
     const [positions, setPositions] = useState<string[]>([])
 
-    const [selectedPosition, setSelectPositions] = useState<string>()
-
     useEffect(() => {
-        ActivityService.getStart().then(positionFromServer => {
+        ActivityService.getAllPositions().then(positionFromServer => {
             setPositions(positionFromServer as string[]);
         })
     }, [])
 
     const selectPosotion = (pos: string) => {
-        setSelectPositions(pos);
-        setData({
-            position: pos
-        })
+        let newData = currentData;
+        currentData.position = pos;
+
+        setCurrentData(newData);
+
+        setData(newData);
     }
 
     return (
-        <>
-        {
-            positions.length > 0 &&
-            <tr>
-                <td>Позиция: </td>
-                <td>
-                    <Select 
-                        options={positions}
-                        setOption={pos => selectPosotion(pos)}
-                    /> 
-                </td>
-            </tr>
-        }
-        </>
+        <tr>
+            <td>Позиция: </td>
+            <td>
+                <Select 
+                    options={positions}
+                    setOption={pos => selectPosotion(pos)}
+                /> 
+            </td>
+        </tr>
     )
 }
 

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 
 import './Select.css'
 import SelectItem from "./SelectItem";
@@ -9,6 +9,7 @@ interface SelectProps {
 }
 
 const Select = ({options, setOption} : SelectProps) => {
+    const container = useRef<any>();
     const [currentOption, setCurrentOption] = useState<string>("");
 
     const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -17,6 +18,18 @@ const Select = ({options, setOption} : SelectProps) => {
     const filteredOptions = useMemo(() => {
         return options.filter(op => op.toLowerCase().includes(currentOption.toLowerCase()))
     }, [currentOption])
+
+    useEffect(() => {
+        const handler = (event:any) => {
+            if (!container.current.contains(event.target)) {
+                changeVisible(false);
+            }
+        };
+        document.addEventListener("click", handler);
+        return () => {
+            document.removeEventListener("click", handler);
+        };
+    });
 
     const runSelect = () => {
         if (options.includes(currentOption)) {
@@ -37,13 +50,13 @@ const Select = ({options, setOption} : SelectProps) => {
 
     return (
         <div>
-            <div className="select__modal__section">
+            <div ref={container} className="select__modal__section">
                 <input 
                     type="text" 
                     value={currentOption}
                     onChange={e => setCurrentOption(e.target.value)}
                     onFocus={() => changeVisible(true)}
-                    onBlur={() => changeVisible(false)}
+                    autoComplete="option"
                 />
                 
                 <button
@@ -52,8 +65,7 @@ const Select = ({options, setOption} : SelectProps) => {
                     Выбрать
                 </button>
             </div>
-            
-
+        
             <div
                 style={
                     {
@@ -62,11 +74,12 @@ const Select = ({options, setOption} : SelectProps) => {
                     }
                 }
                 className={modalVisible ? "select__modal__visible" : "select__modal__hidden"}
+                
             >
                 {
                     filteredOptions.map(option => {
                         return (
-                            <SelectItem 
+                            <SelectItem
                                 key={option} 
                                 text={option} 
                                 setText={setText}

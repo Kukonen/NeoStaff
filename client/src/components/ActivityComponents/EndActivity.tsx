@@ -5,16 +5,25 @@ import ActivityComponentsProps from "./ActivityComponentsProps";
 
 interface EndActivityProps extends ActivityComponentsProps {
     serviceNumber: string
+    date: string;
 }
 
-const EndActivity = ({setData, serviceNumber}: EndActivityProps) => {
-    const [positions, setPositions] = useState<string[]>([])
+const EndActivity = ({setData, serviceNumber, date}: EndActivityProps) => {
+    const [currentData, setCurrentData] = useState<
+        {
+            position: string
+        }
+    >(
+        {
+            position: ""
+        }
+    );
 
-    const [selectedPosition, setSelectPositions] = useState<string>()
+    const [positions, setPositions] = useState<string[]>([])
 
     useEffect(() => {
         if (serviceNumber !== "") {
-            ActivityService.getEnd(serviceNumber).then(positionFromServer => {
+            ActivityService.getPositions(serviceNumber, date).then(positionFromServer => {
                 setPositions(positionFromServer as string[]);
             })
         }
@@ -22,7 +31,7 @@ const EndActivity = ({setData, serviceNumber}: EndActivityProps) => {
 
     useEffect(() => {
         if (serviceNumber !== "") {
-            ActivityService.getEnd(serviceNumber).then(positionFromServer => {
+            ActivityService.getPositions(serviceNumber, date).then(positionFromServer => {
                 setPositions(positionFromServer as string[]);
             })
         }
@@ -30,27 +39,24 @@ const EndActivity = ({setData, serviceNumber}: EndActivityProps) => {
     }, [serviceNumber])
 
     const selectPosotion = (pos: string) => {
-        setSelectPositions(pos);
-        setData({
-            position: pos
-        })
+        let newData = currentData;
+        currentData.position = pos;
+
+        setCurrentData(newData);
+
+        setData(newData);
     }
 
     return (
-        <>
-        {
-            positions.length > 0 &&
-            <tr>
-                <td>Позиция: </td>
-                <td>
-                    <Select 
-                        options={positions}
-                        setOption={pos => selectPosotion(pos)}
-                    /> 
-                </td>
-            </tr>
-        }
-        </>
+        <tr>
+            <td>Позиция: </td>
+            <td>
+                <Select 
+                    options={positions as string[]}
+                    setOption={pos => selectPosotion(pos)}
+                /> 
+            </td>
+        </tr>
     )
 }
 

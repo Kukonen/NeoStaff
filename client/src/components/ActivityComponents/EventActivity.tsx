@@ -69,6 +69,7 @@ const EventActivity = ({setData}: ActivityComponentsProps) => {
                 <td>Место соревнования: </td>
                 <td>
                     <input 
+                        type="text"
                         value={place}
                         onChange={e => changePlace(e.target.value)}
                     />
@@ -79,6 +80,7 @@ const EventActivity = ({setData}: ActivityComponentsProps) => {
                 <td>Тема соревнования: </td>
                 <td>
                     <input 
+                        type="text"
                         value={theme}
                         onChange={e => changeTheme(e.target.value)}
                     />
