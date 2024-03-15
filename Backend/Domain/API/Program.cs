@@ -1,22 +1,6 @@
-using Confluent.Kafka;
 using DAL.DbContext;
 using Service.Implementation;
 using Service.Interface;
-
-// ==================== KAFKA =====================
-var config = new ProducerConfig { BootstrapServers = "kafka:9092" };
-
-using (var producer = new ProducerBuilder<Null, string>(config).Build())
-{
-    Console.WriteLine(producer);
-    for (int i = 0; i < 5; i++)
-	{
-		Console.WriteLine(i);
-        await producer.ProduceAsync("analytics-topic", new Message<Null, string> { Value = "New data" });
-		Thread.Sleep(10000);
-    }
-}
-// ================================================
 
 var builder = WebApplication.CreateBuilder(args);
 

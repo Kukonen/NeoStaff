@@ -14,4 +14,4 @@ COPY . /app
 WORKDIR /app
 
 # Команда для запуска вашего приложения
-CMD ["python", "test-kafka.py"]
+# CMD ["python", "test-kafka.py"]
