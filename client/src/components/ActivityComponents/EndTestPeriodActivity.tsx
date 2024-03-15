@@ -4,10 +4,11 @@ import ActivityService from "../../service/ActivityService";
 import ActivityComponentsProps from "./ActivityComponentsProps";
 
 interface EndTestPeriodActivityProps extends ActivityComponentsProps {
-    serviceNumber: string
+    serviceNumber: string;
+    date: string;
 }
 
-const EndTestPeriodActivity = ({setData, serviceNumber}: EndTestPeriodActivityProps) => {
+const EndTestPeriodActivity = ({setData, serviceNumber, date}: EndTestPeriodActivityProps) => {
     const [currentData, setCurrentData] = useState<
         {
             position: string, 
@@ -28,7 +29,7 @@ const EndTestPeriodActivity = ({setData, serviceNumber}: EndTestPeriodActivityPr
 
     useEffect(() => {
         if (serviceNumber !== "") {
-            ActivityService.getEndTestPeriod(serviceNumber).then(positionFromServer => {
+            ActivityService.getPositions(serviceNumber, date).then(positionFromServer => {
                 setPositions(positionFromServer as string[]);
             })
         }
@@ -36,7 +37,7 @@ const EndTestPeriodActivity = ({setData, serviceNumber}: EndTestPeriodActivityPr
 
     useEffect(() => {
         if (serviceNumber !== "") {
-            ActivityService.getEndTestPeriod(serviceNumber).then(positionFromServer => {
+            ActivityService.getPositions(serviceNumber, date).then(positionFromServer => {
                 setPositions(positionFromServer as string[]);
             })
         }

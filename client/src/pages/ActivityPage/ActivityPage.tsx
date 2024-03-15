@@ -54,7 +54,7 @@ const ActivityPage = () => {
                 setContentByType(<StartActivity setData={data => setStartActivityData(data)} />)
                 break;
             case "Окончание работы в должности":
-                setContentByType(<EndActivity serviceNumber={serviceNumber} setData={data => setEndActivityData(data)}/>)
+                setContentByType(<EndActivity serviceNumber={serviceNumber} date={date} setData={data => setEndActivityData(data)}/>)
                 break;
             case "Аттестация":
                 setContentByType(<CertificationActivity setData={data => setCertificationActivityData(data)}/>)
@@ -66,13 +66,13 @@ const ActivityPage = () => {
                 setContentByType(<CompetitionActivity setData={data => setCompetitionActivityData(data)} />)
                 break;
             case "Мероприятие":
-                setContentByType(<EventActivity setData={data => setEndActivityData(data)}/>)
+                setContentByType(<EventActivity setData={data => setEventActivityData(data)}/>)
                 break;
             case "Окончание испытательного срока":
-                setContentByType(<EndTestPeriodActivity serviceNumber={serviceNumber} setData={data => setEndActivityData(data)} />)
+                setContentByType(<EndTestPeriodActivity serviceNumber={serviceNumber} date={date} setData={data => setEndTestPeriodActivityData(data)} />)
                 break;
             case "Изменение заработной платы":
-                setContentByType(<ChangeSelaryActivity serviceNumber={serviceNumber} setData={data => setChangeSalaryActivityData(data)} />)
+                setContentByType(<ChangeSelaryActivity setData={data => setChangeSalaryActivityData(data)} />)
                 break;
             case "Повышение квалификации":
                 setContentByType(<SkillsActivity setData={data => setSkillsActivityData(data)}/>)

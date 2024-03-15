@@ -13,7 +13,7 @@ const CertificationActivity = ({setData}: ActivityComponentsProps) => {
     useEffect(() => {
         ActivityService.getCertification().then(certificationFromServer => {
             setCertifications(certificationFromServer as { id: string, title: string } []);
-        })
+        }).catch(err => console.log(err))
     }, [])
 
     const selectCertification = (cert: string) => {
@@ -42,11 +42,8 @@ const CertificationActivity = ({setData}: ActivityComponentsProps) => {
 
     return (
         <>
-        {
-            certifications.length > 0 &&
-            <>
-                <tr>
-                    <td>Аттестация: </td>
+            <tr>
+                <td>Аттестация: </td>
                     <td>
                         <Select 
                             options={certifications.map(cert => cert.title)}
@@ -63,9 +60,6 @@ const CertificationActivity = ({setData}: ActivityComponentsProps) => {
                     /> 
                 </td>
             </tr>
-            </>
-            
-        }
         </>
     )
 }

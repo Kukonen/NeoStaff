@@ -9,8 +9,7 @@ const SelectItem = ({text, setText} : SelectItem) => {
     return (
         <div className="select__item"
             onClick={() => {
-                console.log("block", text)
-                // setText(text)
+                setText(text)
             }}
         >
             {
