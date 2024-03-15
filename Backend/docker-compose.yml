@@ -12,10 +12,10 @@ services:
 
   analytics:
     build: 
-      context: ./Analytics
+      context: ./Analytics/analytics
       dockerfile: Dockerfile
     ports:
-      - 8081:80
+      - 8000:8000
     depends_on:
       - mongodb
 
