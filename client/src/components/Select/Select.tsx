@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import './Select.css'
 import SelectItem from "./SelectItem";
@@ -12,6 +12,7 @@ const Select = ({options, setOption} : SelectProps) => {
     const [currentOption, setCurrentOption] = useState<string>("");
 
     const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const [modalDisplayNone, setModalDisplayNone] = useState<boolean>(false);
 
     const filteredOptions = useMemo(() => {
         return options.filter(op => op.toLowerCase().includes(currentOption.toLowerCase()))
@@ -27,6 +28,13 @@ const Select = ({options, setOption} : SelectProps) => {
         setCurrentOption(text)
     }
 
+    const changeVisible = (state: boolean) => {
+        setModalDisplayNone(state)
+        setTimeout(() => {
+            setModalVisible(state)
+        }, 1)
+    }
+
     return (
         <div>
             <div className="select__modal__section">
@@ -34,8 +42,8 @@ const Select = ({options, setOption} : SelectProps) => {
                     type="text" 
                     value={currentOption}
                     onChange={e => setCurrentOption(e.target.value)}
-                    onFocus={() => setModalVisible(true)}
-                    onBlur={() => setModalVisible(false)}
+                    onFocus={() => changeVisible(true)}
+                    onBlur={() => changeVisible(false)}
                 />
                 
                 <button
@@ -47,7 +55,12 @@ const Select = ({options, setOption} : SelectProps) => {
             
 
             <div
-                style={{position: 'relative'}}
+                style={
+                    {
+                        position: 'relative',
+                        display: modalDisplayNone ? 'block' : 'none'
+                    }
+                }
                 className={modalVisible ? "select__modal__visible" : "select__modal__hidden"}
             >
                 {

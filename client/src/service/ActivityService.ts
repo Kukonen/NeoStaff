@@ -17,9 +17,25 @@ class ActivityService {
         })
     }
 
+    static async getStartProject(serviceNumber: string) {
+        return new Promise((resolve, reject) => {
+            server('end', 'GET', [{key: 'serviceNumber', value: serviceNumber}]).then(response => {
+                resolve(response);
+            })
+        })
+    }
+
     static async getCertification() {
         return new Promise((resolve, reject) => {
             server('certification').then(response => {
+                resolve(response);
+            })
+        })
+    }
+
+    static async getEndTestPeriod(serviceNumber: string) {
+        return new Promise((resolve, reject) => {
+            server('end', 'GET', [{key: 'serviceNumber', value: serviceNumber}]).then(response => {
                 resolve(response);
             })
         })

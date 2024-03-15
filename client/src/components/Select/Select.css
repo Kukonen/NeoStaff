@@ -3,6 +3,8 @@
 }
 
 .select__modal__visible {
+    /* display: block; */
+
     position: absolute;
 
     border: 1px solid var(--border-color);
@@ -11,12 +13,23 @@
 
     background-color: var(--background-color-middle);
 
-    /* width: 100%;
-    box-sizing: border-box; */
+    transition: opacity 0.5s ease-in;
+
+    opacity: 1;
+
+    visibility: visible;
+
+    overflow: hidden;
 }
 
 .select__modal__hidden {
-    display: none;
+    /* display: none; */
+    visibility: hidden;
+    transition: opacity 0.5s ease-in;
+
+    overflow: hidden;
+
+    opacity: 0;
 }
 
 .select__item {

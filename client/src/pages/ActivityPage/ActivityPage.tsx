@@ -1,5 +1,13 @@
+import CareerDialogActivity from '../../components/ActivityComponents/CareerDialogActivity';
 import CertificationActivity from '../../components/ActivityComponents/CertificationActivity';
+import ChangeSelaryActivity from '../../components/ActivityComponents/ChangeSelaryActivity';
+import CompetitionActivity from '../../components/ActivityComponents/CompetitionActivity';
 import EndActivity from '../../components/ActivityComponents/EndActivity';
+import EndTestPeriodActivity from '../../components/ActivityComponents/EndTestPeriodActivity';
+import EventActivity from '../../components/ActivityComponents/EventActivity';
+import LearnActivity from '../../components/ActivityComponents/LearnActivity';
+import RebukeActivity from '../../components/ActivityComponents/RebukeActivity';
+import SkillsActivity from '../../components/ActivityComponents/SkillsActivity';
 import StartActivity from '../../components/ActivityComponents/StartActivity';
 import Select from '../../components/Select/Select';
 import ActivityService from '../../service/ActivityService';
@@ -29,6 +37,14 @@ const ActivityPage = () => {
     const [startActivityData, setStartActivityData] = useState<object>({});
     const [endActivityData, setEndActivityData] = useState<object>({});
     const [certificationActivityData, setCertificationActivityData] = useState<object>({});
+    const [learnActivityData, setLearnActivityActivityData] = useState<object>({});
+    const [competitionActivityData, setCompetitionActivityData] = useState<object>({});
+    const [eventActivityData, setEventActivityData] = useState<object>({});
+    const [endTestPeriodActivityData, setEndTestPeriodActivityData] = useState<object>({});
+    const [changeSalaryActivityData, setChangeSalaryActivityData] = useState<object>({});
+    const [skillsActivityData, setSkillsActivityData] = useState<object>({});
+    const [careerDialogActivityData, setCareerDialogActivityData] = useState<object>({});
+    const [rebukeActivityData, setRebukeActivityData] = useState<object>({});
 
     //
 
@@ -44,34 +60,28 @@ const ActivityPage = () => {
                 setContentByType(<CertificationActivity setData={data => setCertificationActivityData(data)}/>)
                 break;
             case "Обучение":
-                setContentByType(<></>)
+                setContentByType(<LearnActivity setData={data => setLearnActivityActivityData(data)}/>)
                 break;
             case "Соревнование":
-                setContentByType(<></>)
+                setContentByType(<CompetitionActivity setData={data => setCompetitionActivityData(data)} />)
                 break;
             case "Мероприятие":
-                setContentByType(<></>)
+                setContentByType(<EventActivity setData={data => setEndActivityData(data)}/>)
                 break;
             case "Окончание испытательного срока":
-                setContentByType(<></>)
+                setContentByType(<EndTestPeriodActivity serviceNumber={serviceNumber} setData={data => setEndActivityData(data)} />)
                 break;
             case "Изменение заработной платы":
-                setContentByType(<></>)
+                setContentByType(<ChangeSelaryActivity serviceNumber={serviceNumber} setData={data => setChangeSalaryActivityData(data)} />)
                 break;
             case "Повышение квалификации":
-                setContentByType(<></>)
-                break;
-            case "Начало работы над проектом":
-                setContentByType(<></>)
-                break;
-            case "Окончание работы над проектом":
-                setContentByType(<></>)
+                setContentByType(<SkillsActivity setData={data => setSkillsActivityData(data)}/>)
                 break;
             case "Карьерный диалог":
-                setContentByType(<></>)
+                setContentByType(<CareerDialogActivity setData={data => setCareerDialogActivityData(data)} />)
                 break;
             case "Нарушение/выговор":
-                setContentByType(<></>)
+                setContentByType(<RebukeActivity setData={data => setRebukeActivityData(data)}/>)
                 break;
             default:
                 setContentByType(<></>)
@@ -88,8 +98,6 @@ const ActivityPage = () => {
         "Окончание испытательного срока",
         "Изменение заработной платы",
         "Повышение квалификации",
-        "Начало работы над проектом",
-        "Окончание работы над проектом",
         "Карьерный диалог",
         "Нарушение/выговор"
     ]
@@ -158,34 +166,52 @@ const ActivityPage = () => {
                 })
                 break;
             case "Обучение":
-                console.log("Вы на обучении");
+                ActivityService.postData('learn', {
+                    ...baseData,
+                    ...learnActivityData
+                })
                 break;
             case "Соревнование":
-                console.log("Участвуете в соревновании");
+                ActivityService.postData('competition', {
+                    ...baseData,
+                    ...competitionActivityData
+                })
                 break;
             case "Мероприятие":
-                console.log("Вы принимаете участие в мероприятии");
+                ActivityService.postData('event', {
+                    ...baseData,
+                    ...eventActivityData
+                })
                 break;
             case "Окончание испытательного срока":
-                console.log("Ваш испытательный срок закончился");
+                ActivityService.postData('endTestPeriod', {
+                    ...baseData,
+                    ...endTestPeriodActivityData
+                })
                 break;
             case "Изменение заработной платы":
-                console.log("Изменена заработная плата");
+                ActivityService.postData('changeSalary', {
+                    ...baseData,
+                    ...changeSalaryActivityData
+                })
                 break;
             case "Повышение квалификации":
-                console.log("Вы повышаете квалификацию");
-                break;
-            case "Начало работы над проектом":
-                console.log("Начата работа над проектом");
-                break;
-            case "Окончание работы над проектом":
-                console.log("Завершена работа над проектом");
+                ActivityService.postData('skills', {
+                    ...baseData,
+                    ...skillsActivityData
+                })
                 break;
             case "Карьерный диалог":
-                console.log("Ведется карьерный диалог");
+                ActivityService.postData('careerDialog', {
+                    ...baseData,
+                    ...careerDialogActivityData
+                })
                 break;
             case "Нарушение/выговор":
-                console.log("Вы нарушили правила");
+                ActivityService.postData('rebuke', {
+                    ...baseData,
+                    ...rebukeActivityData
+                })
                 break;
             default:
                 console.log("Некорректный тип события");
