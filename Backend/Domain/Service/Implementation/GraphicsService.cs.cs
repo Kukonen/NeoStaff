@@ -9,57 +9,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Service.Implementation
 {
-	public class EmployeeService : IEmployeeService
+	public class GraphicsService : IGraphicsService
 	{
 		private readonly ApplicationDbContext _context;
 
-		public EmployeeService(ApplicationDbContext context)
-		{
+        public GraphicsService(ApplicationDbContext context)
+        {
 			_context = context;
+
 		}
 
-		public async Task<BaseResponse<List<Dictionary<string, object>>>> Get()
+		public async Task<BaseResponse<List<Dictionary<string, object>>>> GetActivitiesStatistics(string serviceNumber)
 		{
 			var response = new BaseResponse<List<Dictionary<string, object>>>();
 			response.Data = new List<Dictionary<string, object>>();
-
-			try
-			{
-				var filteredPersons = await _context.Employee.Find(new BsonDocument()).ToListAsync();
-
-				if(filteredPersons == null || filteredPersons.Count == 0) 
-				{
-					response.StatusCode = HttpStatusCode.BadRequest;
-					return response;
-				}
-
-				foreach (var person in filteredPersons)
-				{
-					response.Data.Add(BsonProcessor.ProcessBsonDocument(person));
-				}
-
-				response.StatusCode = HttpStatusCode.OK;
-
-				return response;
-			}
-			catch (Exception)
-			{
-				response.Message = "Error while finding employees";
-				response.StatusCode = HttpStatusCode.InternalServerError;
-
-				return response;
-			}
-		}
-
-		public async Task<BaseResponse<List<string>>> GetPositionsByDate(string dateString, string serviceNumber)
-		{
-			var response = new BaseResponse<List<string>>();
-			response.Data = new List<string>();
 
 			try
 			{
@@ -75,7 +42,8 @@ namespace Service.Implementation
 				}
 
 				var positions = new List<string>(); //Для хранения должностей на каждую активность
-				var boundaryTime = DateTime.ParseExact(dateString, "yyyy-MM-dd", null);
+				int salary = 0;  //Для хранения зарплаты на каждую активность
+				int scores = 0;  //Для хранения количества баллов на каждую активность
 
 				foreach (var id in person["activities"].AsBsonArray)
 				{
@@ -90,30 +58,40 @@ namespace Service.Implementation
 						return response;
 					}
 
-					if (DateTime.ParseExact(activity["date"].AsString, "yyyy-MM-dd", null) <= boundaryTime)
+					if (activity["type"] == "start")
 					{
-						if (activity["type"] == "start")
+						positions.Add(activity["activityInfo"]["position"].AsString);
+					}
+					else if(activity["type"] == "end" || activity["type"] == "endTestPeriod")
+					{
+						if(positions.Contains(activity["activityInfo"]["position"].AsString))
 						{
-							positions.Add(activity["activityInfo"]["position"].AsString);
-						}
-						else if (activity["type"] == "end" || activity["type"] == "endTestPeriod")
-						{
-							if (positions.Contains(activity["activityInfo"]["position"].AsString))
-							{
-								positions.Remove(activity["activityInfo"]["position"].AsString);
-							}
+							positions.Remove(activity["activityInfo"]["position"].AsString);
 						}
 					}
+
+					salary += activity["salary"].AsInt32;
+					scores += activity["mark"].AsInt32;
+
+					var graphicsInfo = new BsonDocument
+					{
+						{ "date", activity["date"] },
+						{ "salary", salary },
+						{ "positions", new BsonArray(positions) },
+						{ "scores", scores },
+						{ "note",  activity["note"] }
+					};
+
+					response.Data.Add(BsonProcessor.ProcessBsonDocument(graphicsInfo));
 				}
 
-				response.Data = positions;
 				response.StatusCode = HttpStatusCode.OK;
 
 				return response;
 			}
 			catch (Exception)
 			{
-				response.Message = "Error while getting employee's positions by date";
+				response.Message = "Error while getting activities statistics.";
 				response.StatusCode = HttpStatusCode.InternalServerError;
 
 				return response;

@@ -19,6 +19,8 @@ builder.Services.AddSingleton<ApplicationDbContext>(provider =>
 builder.Services.AddTransient<IActivityService, ActivityService>();
 builder.Services.AddTransient<IEmployeeService, EmployeeService>();
 builder.Services.AddTransient<IPositionService, PositionService>();
+builder.Services.AddTransient<IGraphicsService, GraphicsService>();
+builder.Services.AddTransient<INotificationService, NotificationService>();
 builder.Services.AddSingleton<DataSeeder>();
 
 var app = builder.Build();

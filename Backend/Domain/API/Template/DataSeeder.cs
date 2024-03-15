@@ -126,27 +126,30 @@ namespace API.Template
 			await _context.Positions.InsertManyAsync(positions);
 
 			await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2023-12-31T00:00:00Z"",
+				""date"": ""2023-12-31"",
 				""note"": ""Important meeting"",
 				""mark"": 40,
+				""salary"": 40000,
 				""activityInfo"": {
 					""position"": ""Manager""
 				}
 			}"), "end", "13579-24680");
 
 			await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2023-12-15T00:00:00Z"",
+				""date"": ""2023-12-15"",
 				""note"": ""Presentation preparation"",
 				""mark"": 50,
+				""salary"": 50000,
 				""activityInfo"": {
 					""position"": ""Developer""
 				}
 			}"), "end", "98765-43210");
 
 			await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2023-12-31T00:00:00Z"",
+				""date"": ""2023-12-31"",
 				""note"": ""Important meeting"",
 				""mark"": 40,
+				""salary"": 60000,
 				""activityInfo"": {
 					""position"": ""Manager""
 				}

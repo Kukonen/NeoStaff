@@ -83,5 +83,19 @@ namespace Service.Tools
 				}
 			}
 		}
+
+		public static BsonDateTime StringToBsonDateTime(string dateString)
+		{
+			string[] dateComponents = dateString.Split('-');
+			int year = int.Parse(dateComponents[0]);
+			int month = int.Parse(dateComponents[1]);
+			int day = int.Parse(dateComponents[2]);
+
+			// Создаем объект DateTime
+			DateTime dateTime = new DateTime(year, month, day);
+
+			// Преобразуем объект DateTime в объект BsonDateTime
+			return new BsonDateTime(dateTime);
+		}
 	}
 }

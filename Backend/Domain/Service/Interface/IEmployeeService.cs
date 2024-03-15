@@ -11,5 +11,7 @@ namespace Service.Interface
 	public interface IEmployeeService
 	{
 		Task<BaseResponse<List<Dictionary<string, object>>>> Get();
+
+		Task<BaseResponse<List<string>>> GetPositionsByDate(string date, string serviceNumber);
 	}
 }

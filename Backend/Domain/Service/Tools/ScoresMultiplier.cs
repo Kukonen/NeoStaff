@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +17,7 @@ namespace Service.Tools
 
  		public static int MultiplyScores(int scores, string type, double KPI = 0.8)
  		{
-      double newScores = scores;
+            double newScores = scores;
 
 			//Множитель баллов за разную сферу активностей
 			if (type == "start" || type == "end" || type == "endTestPeriod" || type == "careerDialog" || type == "rebuke")

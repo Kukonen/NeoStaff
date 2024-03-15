@@ -41,7 +41,7 @@ namespace Service.Implementation
 				activity.Add("type", type);
 
 				await _context.Activities.InsertOneAsync(activity);
-				var result = await AddActivityToEmployee(serviceNumber, activity);
+				var result = await AddActivityToEmployee(serviceNumber, activity, type);
 
 				if(result.StatusCode != HttpStatusCode.OK)
 				{
@@ -108,7 +108,7 @@ namespace Service.Implementation
 			}
 		}
 
-		protected async Task<BaseResponse<BsonDocument>> AddActivityToEmployee(string serviceNumber, BsonDocument activity)
+		protected async Task<BaseResponse<BsonDocument>> AddActivityToEmployee(string serviceNumber, BsonDocument activity, string type)
 		{
 			var response = new BaseResponse<BsonDocument>();
 
@@ -124,10 +124,16 @@ namespace Service.Implementation
 					return response;
 				}
 
+				//Назначение новых баллов работнику с учетом множителей
 				var scores = filteredPerson["scores"].AsInt32;
-				scores += activity["mark"].AsInt32;
+				scores += ScoresMultiplier.MultiplyScores(activity["mark"].AsInt32, type);
+
+				//Изменение зарплаты сотрудника(может быть и ноль спокойно)
+				var salary = filteredPerson["salary"].AsInt32;
+				salary += activity["mark"].AsInt32;
 
 				var update = Builders<BsonDocument>.Update.Set("scores", scores)
+														  .Set("salary", salary)
 														  .Push("activities", activity["_id"].AsObjectId);
 
 				var updatedPerson = await _context.Employee.UpdateOneAsync(filter, update);
