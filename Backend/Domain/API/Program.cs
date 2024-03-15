@@ -1,3 +1,4 @@
+using API.Template;
 using DAL.DbContext;
 using Service.Implementation;
 using Service.Interface;
@@ -18,8 +19,12 @@ builder.Services.AddSingleton<ApplicationDbContext>(provider =>
 builder.Services.AddTransient<IActivityService, ActivityService>();
 builder.Services.AddTransient<IEmployeeService, EmployeeService>();
 builder.Services.AddTransient<IPositionService, PositionService>();
+builder.Services.AddSingleton<DataSeeder>();
 
 var app = builder.Build();
+
+var databaseInitializer = app.Services.GetRequiredService<DataSeeder>();
+await databaseInitializer.SeedDataAsync();
 
 app.MapControllers();
 app.MapControllerRoute(
