@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'StaffDB',
         'CLIENT': {
-            'host': 'mongodb://localhost:27017',  # Здесь укажите адрес вашей MongoDB
+            'host': 'mongodb://mongodb:27017/',  # Здесь укажите адрес вашей MongoDB
         }
     }
 }

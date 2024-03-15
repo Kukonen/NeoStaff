@@ -26,3 +26,6 @@ services:
     environment:
       MONGODB_HOST: mongodb
       MONGODB_PORT: 27017
+    volumes:
+      - ./docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+

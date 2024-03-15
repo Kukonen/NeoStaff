@@ -14,7 +14,7 @@ WORKDIR /app
 
 # Определяем переменные окружения
 ENV DJANGO_SETTINGS_MODULE=analytics.settings
-ENV MONGO_URI=mongodb://localhost:27017/
+ENV MONGO_URI=mongodb://mongodb:27017/
 
 # Открываем порт 8000 для доступа к веб-сервису
 EXPOSE 8000
