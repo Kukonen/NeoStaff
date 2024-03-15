@@ -3,12 +3,17 @@ version: "3.9"
 services:
   api:
     build:
-      context: ./Domain
+      context: ./Backend/Domain
       dockerfile: Dockerfile
     ports:
       - 8080:80
     depends_on:
       - mongodb
+
+  bot:
+    build:
+      context: ./NeoStaffBot
+      dockerfile: Dockerfile
 
   mongodb:
     image: mongo:latest
