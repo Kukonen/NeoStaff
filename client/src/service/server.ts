@@ -5,8 +5,8 @@ export type queryType = {
     value: string | number
 };
 
-// const serverAdress = "http://localhost:8080/api/staff/";
-const serverAdress = "http://localhost:3030/";
+const serverAdress = "http://localhost:8080/api/staff/";
+// const serverAdress = "http://localhost:3030/";
 
 type methodType = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
