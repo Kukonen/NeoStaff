@@ -194,7 +194,7 @@ namespace API.Template
 				await _context.Positions.InsertManyAsync(positions);
 
 				await _service.Create(JsonDocument.Parse(@"{
-					""date"": ""2024-01-02"",
+					""date"": ""2023-01-02"",
 					""note"": ""С отличием прошел тестовый период"",
 					""mark"": 1000,
 					""salary"": 60000,
@@ -206,7 +206,7 @@ namespace API.Template
 				}"), "endTestPeriod", "12345-67890");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-01-16"",
+				""date"": ""2023-01-16"",
 				""note"": ""Назначен в проект компании."",
 				""mark"": 200,
 				""salary"": 5000,
@@ -216,7 +216,7 @@ namespace API.Template
 			}"), "start", "12345-67890");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-01-20"",
+				""date"": ""2023-01-20"",
 				""note"": ""Несоблюдение устава компании."",
 				""mark"": -100,
 				""salary"": 0,
@@ -226,7 +226,7 @@ namespace API.Template
 			}"), "rebuke", "12345-67890");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-02-02"",
+				""date"": ""2023-02-02"",
 				""note"": ""Плановая аттестация сотрудников."",
 				""mark"": 200,
 				""salary"": 2000,
@@ -237,7 +237,7 @@ namespace API.Template
 			}"), "certification", "12345-67890");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-04-03"",
+				""date"": ""2023-04-03"",
 				""note"": ""Завершен проект в роли backend разработчика."",
 				""mark"": 100,
 				""salary"": 1000,
@@ -247,7 +247,7 @@ namespace API.Template
 			}"), "end", "12345-67890");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-05-10"",
+				""date"": ""2023-05-10"",
 				""note"": ""Снятие с должности C# Junior Developer"",
 				""mark"": 0,
 				""salary"": 0,
@@ -257,7 +257,7 @@ namespace API.Template
 			}"), "end", "12345-67890");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-05-12"",
+				""date"": ""2023-05-12"",
 				""note"": ""Повышение до должности C# Middle Developer"",
 				""mark"": 500,
 				""salary"": 30000,
@@ -267,7 +267,7 @@ namespace API.Template
 			}"), "start", "12345-67890");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-07-22"",
+				""date"": ""2023-07-22"",
 				""note"": ""Участие в хакатоне от лица компании"",
 				""mark"": 300,
 				""salary"": 5000,
@@ -280,7 +280,7 @@ namespace API.Template
 			}"), "competition", "12345-67890");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-09-19"",
+				""date"": ""2023-09-19"",
 				""note"": ""Плановая аттестация сотрудников."",
 				""mark"": 100,
 				""salary"": 2000,
@@ -291,7 +291,7 @@ namespace API.Template
 			}"), "certification", "12345-67890");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-10-16"",
+				""date"": ""2023-10-16"",
 				""note"": ""Назначен в проект компании."",
 				""mark"": 100,
 				""salary"": 0,
@@ -301,7 +301,7 @@ namespace API.Template
 			}"), "start", "12345-67890");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-12-12"",
+				""date"": ""2023-12-12"",
 				""note"": ""Назначен на роль обучения младших сотрудников."",
 				""mark"": 200,
 				""salary"": 5000,
@@ -311,7 +311,7 @@ namespace API.Template
 			}"), "start", "12345-67890");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2025-04-03"",
+				""date"": ""2024-04-03"",
 				""note"": ""Завершено участие в проекте в роли Backend Middle Developer."",
 				""mark"": 100,
 				""salary"": 2000,
@@ -325,7 +325,7 @@ namespace API.Template
 
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-03-06"",
+				""date"": ""2023-03-06"",
 				""note"": ""С превосходным результатом прошел тестовый период"",
 				""mark"": 1200,
 				""salary"": 70000,
@@ -337,7 +337,7 @@ namespace API.Template
 			}"), "endTestPeriod", "54321-09876");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-04-22"",
+				""date"": ""2023-04-22"",
 				""note"": ""Участие в хакатоне от лица компании"",
 				""mark"": 100,
 				""salary"": 5000,
@@ -350,7 +350,7 @@ namespace API.Template
 			}"), "competition", "54321-09876");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-05-19"",
+				""date"": ""2023-05-19"",
 				""note"": ""Назначен в проект для ускорения разработки."",
 				""mark"": 300,
 				""salary"": 1000,
@@ -360,7 +360,7 @@ namespace API.Template
 			}"), "start", "54321-09876");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-07-02"",
+				""date"": ""2023-07-02"",
 				""note"": ""Плановая аттестация сотрудников."",
 				""mark"": 200,
 				""salary"": 2000,
@@ -371,7 +371,7 @@ namespace API.Template
 			}"), "certification", "54321-09876");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-08-22"",
+				""date"": ""2023-08-22"",
 				""note"": ""Обучение на платформе для сотрудников."",
 				""mark"": 200,
 				""salary"": 2000,
@@ -382,7 +382,7 @@ namespace API.Template
 			}"), "skills", "54321-09876");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-09-01"",
+				""date"": ""2023-09-01"",
 				""note"": ""Несоблюдение устава компании."",
 				""mark"": -100,
 				""salary"": -1000,
@@ -392,7 +392,7 @@ namespace API.Template
 			}"), "rebuke", "54321-09876");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-09-10"",
+				""date"": ""2023-09-10"",
 				""note"": ""Будет рассмотрено повышение в должности."",
 				""mark"": 0,
 				""salary"": 0,
@@ -403,7 +403,7 @@ namespace API.Template
 			}"), "careerDialog", "54321-09876");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-10-01"",
+				""date"": ""2023-10-01"",
 				""note"": ""Снятие с должности Java Junior Developer для дальнейшего повышения."",
 				""mark"": 0,
 				""salary"": 0,
@@ -413,7 +413,7 @@ namespace API.Template
 			}"), "end", "54321-09876");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-10-03"",
+				""date"": ""2023-10-03"",
 				""note"": ""Одобрено повышение до Java Middle Developer."",
 				""mark"": 400,
 				""salary"": 40000,
@@ -423,7 +423,7 @@ namespace API.Template
 			}"), "start", "54321-09876");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-12-07"",
+				""date"": ""2023-12-07"",
 				""note"": ""Снятие с проекта в связи с переводом в другой."",
 				""mark"": 0,
 				""salary"": -3000,
@@ -433,7 +433,7 @@ namespace API.Template
 			}"), "end", "54321-09876");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-12-07"",
+				""date"": ""2023-12-07"",
 				""note"": ""Снятие с проекта в связи с переводом в другой."",
 				""mark"": 200,
 				""salary"": 5000,
@@ -445,7 +445,7 @@ namespace API.Template
 			}"), "event", "54321-09876");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2025-02-13"",
+				""date"": ""2024-02-13"",
 				""note"": ""Назначен в проект разработчки мобильного приложения о компании."",
 				""mark"": 200,
 				""salary"": 10000,
@@ -459,7 +459,7 @@ namespace API.Template
 
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-03-03"",
+				""date"": ""2023-03-03"",
 				""note"": ""Взят в штат сотрудников."",
 				""mark"": 4500,
 				""salary"": 270000,
@@ -469,7 +469,7 @@ namespace API.Template
 			}"), "start", "98765-43210");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-05-02"",
+				""date"": ""2023-05-02"",
 				""note"": ""Внеплановая аттестация высших сотрудников."",
 				""mark"": 300,
 				""salary"": 30000,
@@ -480,7 +480,7 @@ namespace API.Template
 			}"), "certification", "98765-43210");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-06-29"",
+				""date"": ""2023-06-29"",
 				""note"": ""Назначен лидером проекта по поддержанию сайта компании."",
 				""mark"": 500,
 				""salary"": 50000,
@@ -490,7 +490,7 @@ namespace API.Template
 			}"), "start", "98765-43210");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2024-12-07"",
+				""date"": ""2023-12-07"",
 				""note"": ""Снятие с проекта в связи с переводом в другой."",
 				""mark"": 100,
 				""salary"": 5000,
@@ -502,7 +502,7 @@ namespace API.Template
 			}"), "event", "98765-43210");
 
 				await _service.Create(JsonDocument.Parse(@"{
-				""date"": ""2025-01-13"",
+				""date"": ""2024-01-13"",
 				""note"": ""Назначен управляющим проектами компании."",
 				""mark"": 700,
 				""salary"": 70000,
