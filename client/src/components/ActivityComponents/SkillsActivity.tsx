@@ -52,7 +52,7 @@ const SkillsActivity = ({setData}: ActivityComponentsProps) => {
             </tr>
 
             <tr>
-                <td>Отзыв от организатора</td>
+                <td className="td_top-diection">Отзыв от организатора</td>
                 <td>
                     <textarea 
                         value={report}

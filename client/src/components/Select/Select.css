@@ -1,5 +1,13 @@
 .select__modal__section {
     display: flex;
+
+    &:first-child {
+        border-radius: 0.5rem 0 0 0.5rem !important;
+    }
+
+    &:last-child {
+        border-radius: 0 0.5rem 0.5rem 0 !important;
+    }
 }
 
 .select__modal__visible {

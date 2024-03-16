@@ -75,10 +75,6 @@
 
     margin: 0;
 
-    td {
-        vertical-align: top;
-    }
-
     tbody tr td input {
         box-sizing: border-box; 
     }

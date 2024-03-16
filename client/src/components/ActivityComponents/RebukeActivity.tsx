@@ -29,7 +29,7 @@ const RebukeActivity = ({setData}: ActivityComponentsProps) => {
     return (
         <>
             <tr>
-                <td>Причина: </td>
+                <td className="td_top-diection">Причина: </td>
                 <td>
                     <textarea 
                         value={reason}

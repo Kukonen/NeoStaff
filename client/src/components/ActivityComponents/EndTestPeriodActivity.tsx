@@ -88,7 +88,7 @@ const EndTestPeriodActivity = ({setData, serviceNumber, date}: EndTestPeriodActi
     return (
         <>
             <tr>
-                <td>Позиция: </td>
+                <td className="td_top-diection">Позиция: </td>
                 <td>
                     <Select 
                         options={positions}
@@ -98,7 +98,7 @@ const EndTestPeriodActivity = ({setData, serviceNumber, date}: EndTestPeriodActi
             </tr>
 
             <tr>
-                <td>Отзыв руководителя: </td>
+                <td className="td_top-diection">Отзыв руководителя: </td>
                 <td>
                     <textarea 
                         value={report}
@@ -109,7 +109,7 @@ const EndTestPeriodActivity = ({setData, serviceNumber, date}: EndTestPeriodActi
             </tr>
             
             <tr>
-                <td>Результат: </td>
+                <td className="td_top-diection">Результат: </td>
                 <td>
                     <Select 
                         options={['принят в штат', 'уволен', 'увеличен испытательный срок']}

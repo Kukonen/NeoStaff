@@ -18,7 +18,7 @@ const Report = ({serviceNumber}: ReportProps) => {
 
         ReportService.getActivities(serviceNumber).then(activitiesFromServer => {
             // @ts-ignore
-            setActivities(activitiesFromServer.map( act => [["type", act.type], ...Object.entries(act.activityInfo)]) as TypeActivitiesFields)
+            setActivities(activitiesFromServer)
         }).catch(() => {
             setActivities([])
         })
@@ -31,10 +31,8 @@ const Report = ({serviceNumber}: ReportProps) => {
 
         ReportService.getActivities(serviceNumber).then((activitiesFromServer) => {
             // @ts-ignore
-            // console.log(activitiesFromServer.map( act => [["type", act.type], ...Object.entries(act.activityInfo)]))
-            // @ts-ignore
-            setActivities(activitiesFromServer.map( act => [["type", act.type], ...Object.entries(act.activityInfo)]) as TypeActivitiesFields)
-        }).catch(() => {
+            setActivities(activitiesFromServer)
+            }).catch(() => {
             setActivities([])
         })
     }, [serviceNumber]);

@@ -18,8 +18,11 @@ const StartActivity = ({setData}: ActivityComponentsProps) => {
 
     useEffect(() => {
         ActivityService.getAllPositions().then(positionFromServer => {
-            setPositions(positionFromServer as string[]);
-        })
+            //@ts-ignore
+            const newPositions = positionFromServer.map(p => p.title)
+            console.log(newPositions)
+            setPositions(newPositions);
+        }).then(err => console.log(err));
     }, [])
 
     const selectPosotion = (pos: string) => {
@@ -33,12 +36,21 @@ const StartActivity = ({setData}: ActivityComponentsProps) => {
 
     return (
         <tr>
-            <td>Позиция: </td>
+            <td className="td_top-diection">
+                Позиция
+            </td>
             <td>
-                <Select 
+                {
+                    positions.length > 0 ? 
+                    <Select 
+                        options={positions}
+                        setOption={pos => selectPosotion(pos)}
+                    /> : null
+                }
+                {/* <Select 
                     options={positions}
                     setOption={pos => selectPosotion(pos)}
-                /> 
+                />  */}
             </td>
         </tr>
     )

@@ -5,17 +5,14 @@ const ChangeSelaryActivity = ({setData}: ActivityComponentsProps) => {
     const [currentData, setCurrentData] = useState<
         {
             reason: string,
-            value: number,
         }
     >(
         {
-            reason: "",
-            value: 0,
+            reason: ""
         }
     );
 
     const [reason, setReason] = useState<string>("")
-    const [value, setValue] = useState<number>(0)
 
     const changeReason = (newReason: string) => {
         setReason(newReason);
@@ -28,39 +25,16 @@ const ChangeSelaryActivity = ({setData}: ActivityComponentsProps) => {
         setData(newData);
     }
 
-    const changeValue = (newValue: number) => {
-        setValue(newValue);
-
-        let newData = currentData;
-        currentData.value = newValue;
-        
-
-        setCurrentData(newData);
-
-        setData(newData);
-    }
-
     return (
         <>
             <tr>
-                <td>Причина: </td>
+                <td className="td_top-diection">Причина: </td>
                 <td>
                 <textarea 
                     rows={3}
                     value={reason}
                     onChange={e => changeReason(e.target.value)}
                 />
-                </td>
-            </tr>
-            
-            <tr>
-                <td>Размер: </td>
-                <td>
-                    <input 
-                        type="number"
-                        value={value}
-                        onChange={e => changeValue(Number(e.target.value))}
-                    />
                 </td>
             </tr>
         </>

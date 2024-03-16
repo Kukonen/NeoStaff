@@ -7,14 +7,12 @@ const EventActivity = ({setData}: ActivityComponentsProps) => {
     const [currentData, setCurrentData] = useState<
         {
             place: string, 
-            result: string,
             theme: string,
             role: 'participant' | 'speaker' | ''
         }
     >(
         {
-            place: "", 
-            result: "",
+            place: "",
             role: "",
             theme: ""
         }
@@ -88,7 +86,7 @@ const EventActivity = ({setData}: ActivityComponentsProps) => {
             </tr>
             
             <tr>
-                <td>Роль: </td>
+                <td className="td_top-diection">Роль: </td>
                 <td>
                     <Select 
                         options={['слушатель', 'выступающий']}

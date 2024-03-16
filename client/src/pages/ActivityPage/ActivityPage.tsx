@@ -141,7 +141,7 @@ const ActivityPage = () => {
         const baseData = {
             serviceNumber,
             date,
-            salaryChange: salary,
+            salary,
             note,
             mark
         }
@@ -150,67 +150,67 @@ const ActivityPage = () => {
             case "Вступление в должность":
                 ActivityService.postData('start', {
                     ...baseData,
-                    ...startActivityData
+                    activityInfo: startActivityData
                 });
                 break;
             case "Окончание работы в должности":
                 ActivityService.postData('end', {
                     ...baseData,
-                    ...endActivityData
+                    activityInfo: endActivityData
                 })
                 break;
             case "Аттестация":
                 ActivityService.postData('certification', {
                     ...baseData,
-                    ...certificationActivityData
+                    activityInfo: certificationActivityData
                 })
                 break;
             case "Обучение":
                 ActivityService.postData('learn', {
                     ...baseData,
-                    ...learnActivityData
+                    activityInfo: learnActivityData
                 })
                 break;
             case "Соревнование":
                 ActivityService.postData('competition', {
                     ...baseData,
-                    ...competitionActivityData
+                    activityInfo: competitionActivityData
                 })
                 break;
             case "Мероприятие":
                 ActivityService.postData('event', {
                     ...baseData,
-                    ...eventActivityData
+                    activityInfo: eventActivityData
                 })
                 break;
             case "Окончание испытательного срока":
                 ActivityService.postData('endTestPeriod', {
                     ...baseData,
-                    ...endTestPeriodActivityData
+                    activityInfo: endTestPeriodActivityData
                 })
                 break;
             case "Изменение заработной платы":
                 ActivityService.postData('changeSalary', {
                     ...baseData,
-                    ...changeSalaryActivityData
+                    activityInfo: changeSalaryActivityData
                 })
                 break;
             case "Повышение квалификации":
                 ActivityService.postData('skills', {
                     ...baseData,
-                    ...skillsActivityData
+                    activityInfo: skillsActivityData
                 })
                 break;
             case "Карьерный диалог":
                 ActivityService.postData('careerDialog', {
                     ...baseData,
-                    ...careerDialogActivityData
+                    activityInfo: careerDialogActivityData
                 })
                 break;
             case "Нарушение/выговор":
                 ActivityService.postData('rebuke', {
                     ...baseData,
-                    ...rebukeActivityData
+                    activityInfo: rebukeActivityData
                 })
                 break;
             default:
@@ -270,7 +270,9 @@ const ActivityPage = () => {
                         </tr>
 
                         <tr>
-                            <td>Оценка:</td>
+                            <td id="activity__mark__cell">
+                                Оценка: 
+                            </td>
                             <td>
                                 <input
                                     type='number'
@@ -281,7 +283,7 @@ const ActivityPage = () => {
                         </tr>
 
                         <tr>
-                            <td>Вид:</td>
+                            <td className='td_top-diection'>Вид:</td>
                             <td>
                                 <Select options={types} setOption={getType => setType(getType)} />
                             </td>

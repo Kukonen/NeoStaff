@@ -29,9 +29,14 @@ class ActivityService {
         })
     }
 
-    static async postData(url: string, data: object) {
+    static async postData(url: string, data: any) {
+        const formatData = JSON.parse(JSON.stringify(data));
+        delete formatData.serviceNumber; 
         return new Promise((resolve, reject) => {
-            server(url, 'POST', undefined, data).then(response => {
+            server('activities', 'POST', [
+                {key: 'type', value: url},
+                {key: 'serviceNumber', value: data.serviceNumber}
+            ], formatData).then(response => {
                 resolve(response);
             }).catch(err => reject(err));
         })

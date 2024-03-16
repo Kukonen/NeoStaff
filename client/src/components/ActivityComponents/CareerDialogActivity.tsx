@@ -53,7 +53,7 @@ const CareerDialogActivity = ({setData}: ActivityComponentsProps) => {
     return (
         <>
             <tr>
-                <td>Отзыв о разговоре: </td>
+                <td className="td_top-diection">Отзыв о разговоре: </td>
                 <td>
                     <textarea 
                         value={report}
