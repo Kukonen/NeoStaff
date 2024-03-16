@@ -12,10 +12,13 @@ internal class Program
     {
         // Получаем телеграм-бота
         var botClient = new TelegramBotClient("6583175351:AAGyn8gWgygq4dZ_4lGf20JsvOzguD6C3gg");
+        
+        Console.WriteLine("bot init!");
 
 
         // Начинаем получать сообщения от бота
         botClient.StartReceiving(HandleUpdateAsync, Error);
+        Console.WriteLine("bot starts recieve!");
 
 
         // Запуск планировщика для отправки сообщений каждый день в 9 утра
