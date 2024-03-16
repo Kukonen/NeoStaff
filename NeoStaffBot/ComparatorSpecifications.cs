@@ -13,6 +13,7 @@ namespace NeoStaffBot
         {
             List<string> employeesNames = new List<string>();
 
+
             if (employeeSpecifications == null)
             {
                 return employeesNames;
@@ -20,7 +21,15 @@ namespace NeoStaffBot
 
             foreach (var employeeSpecification in employeeSpecifications)
             {
-                DateOnly specificationDate = employeeSpecification.LastSpecificationDate;
+                DateOnly specificationDate = employeeSpecification.LastCertification;
+                string lastCertificationDate = employeeSpecification.LastCertification.ToString();
+
+                if (lastCertificationDate.Equals("01/01/0001"))
+                {
+                    employeesNames.Add(string.Join(" ", "-", employeeSpecification.Surname, employeeSpecification.Name, employeeSpecification.Middlename,
+                        "[ отсутствие аттестаций ]"));
+                    continue;
+                }
 
                 // Получение разницы в месяцах
                 int differenceInMonths = (toodayDate.Year - specificationDate.Year) * 12 + toodayDate.Month - specificationDate.Month;
@@ -28,7 +37,8 @@ namespace NeoStaffBot
                 // Сравнение с разницей в один месяц
                 if (differenceInMonths > 1)
                 {
-                    employeesNames.Add(string.Join(" ", employeeSpecification.Surname, employeeSpecification.Name, employeeSpecification.Middlename));
+                    employeesNames.Add(string.Join(" ", "-", employeeSpecification.Surname, employeeSpecification.Name, employeeSpecification.Middlename,
+                        "[ последняя аттестация более месяца назад:", lastCertificationDate, "]"));
                 }
             }
 

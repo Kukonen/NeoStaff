@@ -1,5 +1,7 @@
 ﻿using NeoStaffBot.Model;
+using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace NeoStaffBot
 {
@@ -12,22 +14,83 @@ namespace NeoStaffBot
             {
                 try
                 {
-                    HttpResponseMessage response = await client.GetAsync("http://localhost:8080/api/staff/notification");
-                    Console.WriteLine(response.ToString());
+                    HttpResponseMessage response = await client.GetAsync("http://api:80/api/staff/notification");
+                    //HttpResponseMessage response = await client.GetAsync("http://localhost:8080/api/staff/notification");
 
                     // Проверяем успешность запроса
                     if (response.IsSuccessStatusCode)
                     {
-                        // Читаем содержимое ответа
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine(responseBody);
+
+                        string unescapedBody = Regex.Unescape(responseBody);
+
+                        List<EmployeeSpecification> objectsList = new List<EmployeeSpecification>();
+
                         try
                         {
-                            return JsonSerializer.Deserialize<EmployeeSpecification[]>(responseBody);
-                        } catch (Exception ex)
+                            JsonDocument jsonDocument = JsonDocument.Parse(unescapedBody);
+
+
+                            foreach (JsonElement element in jsonDocument.RootElement.EnumerateArray())
+                            {
+                                var employeeSpecification = new EmployeeSpecification();
+
+                                foreach (JsonProperty item in element.EnumerateObject())
+                                {
+                                    switch (item.Name)
+                                    {
+                                        case "serviceNumber":
+                                            {
+                                                employeeSpecification.ServiceNumber = item.Value.ToString();
+                                                break;
+                                            }
+
+                                        case "surname":
+                                            {
+                                                employeeSpecification.Surname = item.Value.ToString();
+                                                break;
+                                            }
+
+                                        case "name":
+                                            {
+                                                employeeSpecification.Name = item.Value.ToString();
+                                                break;
+                                            }
+
+                                        case "middlename":
+                                            {
+                                                employeeSpecification.Middlename = item.Value.ToString();
+                                                break;
+                                            }
+
+                                        case "lastCertification":
+                                            {
+                                                if (item.Value.ToString().Equals(""))
+                                                {
+                                                    employeeSpecification.LastCertification = DateOnly.ParseExact("0001-01-01", "yyyy-MM-dd", null);
+                                                }
+                                                else
+                                                {
+                                                    employeeSpecification.LastCertification = DateOnly.ParseExact(item.Value.ToString(), "yyyy-MM-dd", null);
+                                                }
+                                                break;
+                                            }
+
+                                        default:
+                                            {
+                                                throw new Exception();
+                                            }
+                                    }
+                                }
+
+                                objectsList.Add(employeeSpecification);
+                            }
+
+                            return objectsList.ToArray();
+                        }
+                        catch (Exception)
                         {
-                            Console.WriteLine("Ошибка: " + ex.Message);
-                            return null;
+                            return objectsList.ToArray();
                         }
                     }
                     else
