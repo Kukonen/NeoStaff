@@ -64,5 +64,11 @@ namespace DAL.DbContext
 				return database.GetCollection<BsonDocument>("positions");
 			}
 		}
+
+		public int GetCollectionsCount()
+		{
+			var collectionNames = database.ListCollectionNames().ToList();
+			return collectionNames.Count;
+		}
 	}
 }
