@@ -13,7 +13,7 @@ namespace NeoStaffBot.Model
         public string Surname { get; set; }
         public string Middlename { get; set; }
         public string Name { get; set; }
-        public DateOnly LastSpecificationDate { get; set; }
+        public DateOnly LastCertification { get; set; }
 
     }
 }
