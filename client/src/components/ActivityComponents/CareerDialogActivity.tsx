@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Select from "../Select/Select";
-import ActivityService from "../../service/ActivityService";
 import ActivityComponentsProps from "./ActivityComponentsProps";
 
 const CareerDialogActivity = ({setData}: ActivityComponentsProps) => {
@@ -54,11 +53,12 @@ const CareerDialogActivity = ({setData}: ActivityComponentsProps) => {
     return (
         <>
             <tr>
-                <td>Место соревнования: </td>
+                <td>Отзыв о разговоре: </td>
                 <td>
-                    <input 
+                    <textarea 
                         value={report}
                         onChange={e => changeReport(e.target.value)}
+                        rows={3}
                     />
                 </td>
             </tr>

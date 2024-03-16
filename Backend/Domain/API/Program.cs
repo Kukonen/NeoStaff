@@ -24,10 +24,10 @@ builder.Services.AddTransient<INotificationService, NotificationService>();
 builder.Services.AddSingleton<DataSeeder>();
 
 builder.Services.AddCors(options => options.AddPolicy("MainPolicy", builder => builder
-					.WithOrigins("https://localhost:3000")
-					.AllowAnyHeader()
-					.AllowAnyMethod())
-			   );
+          .WithOrigins("http://localhost:3000")
+          .AllowAnyHeader()
+          .AllowAnyMethod())
+         );
 
 var app = builder.Build();
 

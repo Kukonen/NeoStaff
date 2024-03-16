@@ -1,27 +1,23 @@
 import server from "./server";
 
 class ActivityService {
-    static async getStart() {
+
+    static async getPositions(serviceNumber: string, date: string) {
         return new Promise((resolve, reject) => {
-            server('start').then(response => {
+            server('employees/date', 'GET', [
+                {key: 'serviceNumber', value: serviceNumber},
+                {key: 'date', value: date}
+            ]).then(response => {
                 resolve(response);
-            })
+            }).catch(err => reject(err));
         })
     }
 
-    static async getEnd(serviceNumber: string) {
+    static async getAllPositions() {
         return new Promise((resolve, reject) => {
-            server('end', 'GET', [{key: 'serviceNumber', value: serviceNumber}]).then(response => {
+            server('positions').then(response => {
                 resolve(response);
-            })
-        })
-    }
-
-    static async getStartProject(serviceNumber: string) {
-        return new Promise((resolve, reject) => {
-            server('end', 'GET', [{key: 'serviceNumber', value: serviceNumber}]).then(response => {
-                resolve(response);
-            })
+            }).catch(err => reject(err));
         })
     }
 
@@ -29,15 +25,7 @@ class ActivityService {
         return new Promise((resolve, reject) => {
             server('certification').then(response => {
                 resolve(response);
-            })
-        })
-    }
-
-    static async getEndTestPeriod(serviceNumber: string) {
-        return new Promise((resolve, reject) => {
-            server('end', 'GET', [{key: 'serviceNumber', value: serviceNumber}]).then(response => {
-                resolve(response);
-            })
+            }).catch(err => reject(err));
         })
     }
 
@@ -45,7 +33,7 @@ class ActivityService {
         return new Promise((resolve, reject) => {
             server(url, 'POST', undefined, data).then(response => {
                 resolve(response);
-            })
+            }).catch(err => reject(err));
         })
     }
 }
