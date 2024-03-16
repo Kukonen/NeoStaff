@@ -13,6 +13,11 @@ namespace NeoStaffBot
         {
             List<string> employeesNames = new List<string>();
 
+            if (employeeSpecifications == null)
+            {
+                return employeesNames;
+            }
+
             foreach (var employeeSpecification in employeeSpecifications)
             {
                 DateOnly specificationDate = employeeSpecification.LastSpecificationDate;

@@ -12,7 +12,7 @@ namespace NeoStaffBot
             {
                 try
                 {
-                    HttpResponseMessage response = await client.GetAsync("localhost:8080/api/staff/notification");
+                    HttpResponseMessage response = await client.GetAsync("http://localhost:8080/api/staff/notification");
                     Console.WriteLine(response.ToString());
 
                     // Проверяем успешность запроса
@@ -37,7 +37,7 @@ namespace NeoStaffBot
                     }
 
                 }
-                catch (HttpRequestException e)
+                catch (Exception e)
                 {
                     Console.WriteLine("Ошибка при выполнении запроса: " + e.Message);
                     return null;
