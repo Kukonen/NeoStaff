@@ -19,7 +19,7 @@ namespace API.Template
 
 		public async Task SeedDataAsync()
 		{
-			if(_context.GetCollectionsCount() > 0)
+			if(_context.GetDocumentsCount() > 0)
 			{
 				//Вставка персонала
 				var employees = new List<BsonDocument>

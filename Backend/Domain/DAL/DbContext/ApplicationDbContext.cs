@@ -70,5 +70,12 @@ namespace DAL.DbContext
 			var collectionNames = database.ListCollectionNames().ToList();
 			return collectionNames.Count;
 		}
+
+		public long GetDocumentsCount()
+		{
+			return Employee.CountDocuments(new BsonDocument()) +
+				   Positions.CountDocuments(new BsonDocument()) +
+				   Activities.CountDocuments(new BsonDocument());
+        }
 	}
 }
