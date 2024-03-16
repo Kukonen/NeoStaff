@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Select from "../Select/Select";
-import ActivityService from "../../service/ActivityService";
 import ActivityComponentsProps from "./ActivityComponentsProps";
 
 const LearnActivity = ({setData}: ActivityComponentsProps) => {

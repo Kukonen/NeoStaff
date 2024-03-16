@@ -49,7 +49,7 @@ const EndActivity = ({setData, serviceNumber, date}: EndActivityProps) => {
 
     return (
         <tr>
-            <td>Позиция: </td>
+            <td className="td_top-diection">Позиция: </td>
             <td>
                 <Select 
                     options={positions as string[]}

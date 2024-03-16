@@ -112,7 +112,7 @@ const CompetitionActivity = ({setData}: ActivityComponentsProps) => {
                 </td>
             </tr>
             <tr>
-                <td>Роль: </td>
+                <td className="td_top-diection">Роль: </td>
                 <td>
                     <Select 
                         options={['участник', 'организатор', 'член жюри']}

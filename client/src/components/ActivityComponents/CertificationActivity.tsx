@@ -44,7 +44,7 @@ const CertificationActivity = ({setData}: ActivityComponentsProps) => {
         <>
             <tr>
                 <td>Аттестация: </td>
-                    <td>
+                    <td className="td_top-diection">
                         <Select 
                             options={certifications.map(cert => cert.title)}
                             setOption={cert => selectCertification(cert)}

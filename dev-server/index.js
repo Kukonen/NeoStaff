@@ -62,7 +62,7 @@ app.get('/activities', (req, res) => {
         {
             "_id": "65f426e4fc12ea27eeb8e2fd",
             "date": "2023-12-31",
-            "note": "Хорошо поработал",
+            "note": "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
             "mark": 100,
             "activityInfo": {
                 "position": "Backend c# developer"
