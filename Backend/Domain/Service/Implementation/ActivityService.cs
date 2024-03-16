@@ -130,7 +130,7 @@ namespace Service.Implementation
 
 				//Изменение зарплаты сотрудника(может быть и ноль спокойно)
 				var salary = filteredPerson["salary"].AsInt32;
-				salary += activity["mark"].AsInt32;
+				salary += activity["salary"].AsInt32;
 
 				var update = Builders<BsonDocument>.Update.Set("scores", scores)
 														  .Set("salary", salary)
