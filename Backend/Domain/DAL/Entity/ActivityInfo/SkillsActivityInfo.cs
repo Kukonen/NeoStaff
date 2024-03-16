@@ -8,8 +8,8 @@ namespace DAL.Entity.ActivityInfo
 {
 	public class SkillsActivityInfo
 	{
-        public int Role { get; set; }
+        public string Skill { get; set; }
 
-        public string Position { get; set; }
+        public string Report { get; set; }
     }
 }

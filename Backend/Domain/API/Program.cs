@@ -23,11 +23,18 @@ builder.Services.AddTransient<IGraphicsService, GraphicsService>();
 builder.Services.AddTransient<INotificationService, NotificationService>();
 builder.Services.AddSingleton<DataSeeder>();
 
+builder.Services.AddCors(options => options.AddPolicy("MainPolicy", builder => builder
+					.WithOrigins("https://localhost:3000")
+					.AllowAnyHeader()
+					.AllowAnyMethod())
+			   );
+
 var app = builder.Build();
 
 var databaseInitializer = app.Services.GetRequiredService<DataSeeder>();
 await databaseInitializer.SeedDataAsync();
 
+app.UseCors("MainPolicy");
 app.MapControllers();
 app.MapControllerRoute(
 	name: "default",
